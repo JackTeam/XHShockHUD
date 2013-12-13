@@ -23,7 +23,7 @@
 #pragma mark - Propertys
 
 - (void)_setupUIWithIcon:(NSString *)iconImageName {
-    UIImage *iconImage = [UIImage imageNamed:iconImageName];
+    UIImage *iconImage = [UIImage imageWithContentsOfFile:XH_BUNDLE_IMAGE(iconImageName)];
     UIImageView *iconImageView = [[UIImageView alloc] initWithImage:iconImage];
     CGFloat padding = 18.7;
     CGRect iconImageViewFrame = iconImageView.frame;
@@ -64,16 +64,16 @@
 - (void)setHudType:(XHHUDType)hudType {
     _hudType = hudType;
     switch (_hudType) {
-        case kError:
+        case kXHHUDError:
             [self _setupUIWithIcon:kIconError];
             break;
-        case kSuccess:
+        case kXHHUDSuccess:
             [self _setupUIWithIcon:kIconSuccess];
             break;
-        case kInfo:
+        case kXHHUDInfo:
             [self _setupUIWithIcon:kIconInfo];
             break;
-        case kLoading:
+        case kXHHUDLoading:
             [self _setupLoadingUI];
             break;
         default:

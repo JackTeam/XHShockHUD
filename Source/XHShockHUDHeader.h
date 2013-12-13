@@ -9,11 +9,13 @@
 #ifndef XHShockHUD_XHShockHUDHeader_h
 #define XHShockHUD_XHShockHUDHeader_h
 
+#define XH_BUNDLE_IMAGE(_file) [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"XHShockHUD.bundle"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%@.png", _file, ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2) ? @"@2x" : @""]]
+
 typedef NS_ENUM(NSInteger, XHHUDType) {
-    kError = 0,
-    kSuccess,
-    kInfo,
-    kLoading
+    kXHHUDError = 0,
+    kXHHUDSuccess,
+    kXHHUDInfo,
+    kXHHUDLoading
 };
 
 typedef NS_ENUM(NSInteger, XHHUDAnimationType) {

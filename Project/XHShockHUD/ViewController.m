@@ -67,7 +67,7 @@
 //    [self.view showDamageHUD:damageLabel
 //                    duration:1.5
 //                  moveVector:CGPointMake(0,-75)];
-    [self.view showHUDWithText:@"我爱你" hudType:kSuccess animationType:kFade delay:2.0];
+    [self.view showHUDWithText:@"我爱你" hudType:kXHHUDSuccess animationType:kFade delay:2.0];
     
 }
 
