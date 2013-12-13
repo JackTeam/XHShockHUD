@@ -7,45 +7,38 @@
 //
 
 #import "ViewController.h"
-#import "XHShockHUD.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation ViewController
 
+#pragma mark - Left cycle init
+
+- (void)_loadHuds {
+    dispatch_async(dispatch_queue_create("load HUDs", NULL), ^{
+        NSArray *huds = [NSArray arrayWithObjects:@"CustomHUDViewController", @"XHUIKitViewController", @"MultiViewController", nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.huds = huds;
+            [self.tableView reloadData];
+        });
+    });
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self _loadHuds];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.title = NSLocalizedString(@"点击任何地方试试看", @"");
+    self.title = NSLocalizedString(@"HUD组件", @"");
     
-    self.view.backgroundColor = [UIColor blackColor];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                 action:@selector(_tapHandler:)];
     
-    [self.view addGestureRecognizer:tap];
-    
-    tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                  action:@selector(_tapHandler:)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-    imageView.image = [UIImage imageNamed:@"5_1280x800.jpeg"];
-    imageView.userInteractionEnabled = YES;
-    imageView.backgroundColor = [UIColor grayColor];
-    [imageView addGestureRecognizer:tap];
-    [self.view addSubview:imageView];
-    
-    tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                  action:@selector(_tapHandler:)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(100, 210, 200, 100)];
-    label.text = NSLocalizedString(@"试试在文字里面点击看看", @"");
-    label.backgroundColor = [UIColor grayColor];
-    label.textColor = [UIColor blackColor];
-    [label addGestureRecognizer:tap];
-    [self.view addSubview:label];
-    
-    // 只要是继承UIView的类，我们的HUD都可以在里面show出来，并且是你需要的，喜欢的，样式好的，欢迎大家来强大他
+    [self.view showHUDWithText:@"只要是继承UIView的类，我们的HUD都可以在里面show出来，并且是你需要的，喜欢的，样式好的，欢迎大家来强大他" hudSize:CGSizeMake(250, 200) hudType:kXHHUDInfo animationType:kXHHUDFade delay:1.];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,21 +47,31 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UIGesture 
+#pragma mark - UITableView dataSource
 
-- (void)_tapHandler:(UITapGestureRecognizer *)tap {
-    UIView *tapLocalView = tap.view;
-    CGPoint point = [tap locationInView:tapLocalView];
-//    UILabel *damageLabel = [[UILabel alloc]  initWithFrame:CGRectMake(0, 0, 50.0, 20.0) ];
-//    damageLabel.text = @"50";
-//    damageLabel.textColor = [UIColor yellowColor];
-//    damageLabel.center = point;
-//    damageLabel.textAlignment = UITextAlignmentCenter;
-//    [self.view showDamageHUD:damageLabel
-//                    duration:1.5
-//                  moveVector:CGPointMake(0,-75)];
-    [self.view showHUDWithText:@"我爱你" hudType:kXHHUDSuccess animationType:kFade delay:2.0];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.huds.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"cellIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    NSString *className = self.huds[indexPath.row];
+    cell.textLabel.text = className;
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", className]];
     
+    return cell;
+}
+
+#pragma mark - UITableView delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Class class = NSClassFromString(self.huds[indexPath.row]);
+    id viewController = [[class alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

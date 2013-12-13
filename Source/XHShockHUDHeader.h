@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, XHHUDType) {
 };
 
 typedef NS_ENUM(NSInteger, XHHUDAnimationType) {
-    kFade = 0
+    kXHHUDFade = 0
 };
 
 #endif

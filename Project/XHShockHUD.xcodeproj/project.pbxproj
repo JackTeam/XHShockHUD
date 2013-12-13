@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB31E45D185B0EA200817941 /* CustomHUDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB31E45C185B0EA200817941 /* CustomHUDViewController.m */; };
+		AB31E460185B0EB600817941 /* XHUIKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB31E45F185B0EB600817941 /* XHUIKitViewController.m */; };
+		AB31E463185B145700817941 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB31E462185B145700817941 /* BaseViewController.m */; };
+		AB31E466185B181500817941 /* MultiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB31E465185B181500817941 /* MultiViewController.m */; };
 		AB466307185AB07F007826BE /* XHShockHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB466306185AB07F007826BE /* XHShockHUD.bundle */; };
 		ABDC2EFF185A89C000D78D31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABDC2EFE185A89C000D78D31 /* Foundation.framework */; };
 		ABDC2F01185A89C000D78D31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABDC2F00185A89C000D78D31 /* CoreGraphics.framework */; };
@@ -37,6 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB31E45B185B0EA200817941 /* CustomHUDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomHUDViewController.h; sourceTree = "<group>"; };
+		AB31E45C185B0EA200817941 /* CustomHUDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomHUDViewController.m; sourceTree = "<group>"; };
+		AB31E45E185B0EB600817941 /* XHUIKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHUIKitViewController.h; sourceTree = "<group>"; };
+		AB31E45F185B0EB600817941 /* XHUIKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHUIKitViewController.m; sourceTree = "<group>"; };
+		AB31E461185B145700817941 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		AB31E462185B145700817941 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		AB31E464185B181500817941 /* MultiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiViewController.h; sourceTree = "<group>"; };
+		AB31E465185B181500817941 /* MultiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiViewController.m; sourceTree = "<group>"; };
 		AB466306185AB07F007826BE /* XHShockHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = XHShockHUD.bundle; sourceTree = "<group>"; };
 		AB4D3C05185AA982007E28F3 /* XHShockHUDHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHShockHUDHeader.h; sourceTree = "<group>"; };
 		ABDC2EFB185A89C000D78D31 /* XHShockHUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XHShockHUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,8 +138,16 @@
 			children = (
 				ABDC2F0D185A89C000D78D31 /* AppDelegate.h */,
 				ABDC2F0E185A89C000D78D31 /* AppDelegate.m */,
+				AB31E461185B145700817941 /* BaseViewController.h */,
+				AB31E462185B145700817941 /* BaseViewController.m */,
 				ABDC2F16185A89C000D78D31 /* ViewController.h */,
 				ABDC2F17185A89C000D78D31 /* ViewController.m */,
+				AB31E45B185B0EA200817941 /* CustomHUDViewController.h */,
+				AB31E45C185B0EA200817941 /* CustomHUDViewController.m */,
+				AB31E45E185B0EB600817941 /* XHUIKitViewController.h */,
+				AB31E45F185B0EB600817941 /* XHUIKitViewController.m */,
+				AB31E464185B181500817941 /* MultiViewController.h */,
+				AB31E465185B181500817941 /* MultiViewController.m */,
 				ABDC2F19185A89C000D78D31 /* Images.xcassets */,
 				ABDC2F05185A89C000D78D31 /* Supporting Files */,
 			);
@@ -285,11 +305,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB31E466185B181500817941 /* MultiViewController.m in Sources */,
 				ABDC2F18185A89C000D78D31 /* ViewController.m in Sources */,
+				AB31E463185B145700817941 /* BaseViewController.m in Sources */,
+				AB31E45D185B0EA200817941 /* CustomHUDViewController.m in Sources */,
 				ABDC2F0F185A89C000D78D31 /* AppDelegate.m in Sources */,
 				ABDC2F0B185A89C000D78D31 /* main.m in Sources */,
 				ABDC2F3A185A8A6A00D78D31 /* UIView+XHShockHUD.m in Sources */,
 				ABDC2F4B185A953C00D78D31 /* UIView+XHCustomHUD.m in Sources */,
+				AB31E460185B0EB600817941 /* XHUIKitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

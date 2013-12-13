@@ -7,6 +7,7 @@
 //
 
 #import "UIView+XHCustomHUD.h"
+#import <objc/runtime.h>
 
 #define kIconError @"icon-error"
 #define kIconSuccess @"icon-success"
@@ -133,20 +134,53 @@
 
 @implementation UIView (XHCustomHUD)
 
+static char UIViewHUD;
+
+#pragma mark - getter / setter
+
+- (void)setHudView:(XHHUDView *)hudView {
+    [self willChangeValueForKey:@"hudView"];
+    objc_setAssociatedObject(self, &UIViewHUD,
+                             hudView,
+                             OBJC_ASSOCIATION_ASSIGN);
+    [self didChangeValueForKey:@"hudView"];
+}
+
+- (XHHUDView *)hudView {
+    return objc_getAssociatedObject(self, &UIViewHUD);
+}
+
+#pragma mark - Public api
+
+- (void)showHUDWithText:(NSString *)text hudType:(XHHUDType)hudType animationType:(XHHUDAnimationType)animationType {
+    [self showHUDWithText:text hudType:hudType animationType:animationType delay:0];
+}
+
+- (void)showHUDWithText:(NSString *)text hudType:(XHHUDType)hudType animationType:(XHHUDAnimationType)animationType delay:(NSTimeInterval)delay {
+    [self showHUDWithText:text hudSize:CGSizeMake(150, 150) hudType:hudType animationType:animationType delay:delay];
+}
+
 - (void)showHUDWithText:(NSString *)text
+                hudSize:(CGSize)hudSize
                 hudType:(XHHUDType)hudType
           animationType:(XHHUDAnimationType)animationType
                   delay:(NSTimeInterval)delay {
-    XHHUDView *hudView = [[XHHUDView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    XHHUDView *hudView = [[XHHUDView alloc] initWithFrame:CGRectZero];
+    
+    CGRect hudViewFrame = hudView.frame;
+    hudViewFrame.size = hudSize;
+    hudView.frame = hudViewFrame;
+    
     hudView.center = self.center;
     hudView.text = text;
     hudView.hudType = hudType;
     hudView.transform = CGAffineTransformMakeScale(1.45, 1.45);
     hudView.alpha = 0.0;
     [self addSubview:hudView];
+    self.hudView = hudView;
     
     switch (animationType) {
-        case kFade:
+        case kXHHUDFade:
             [self _fadeAnimationWithHUDView:hudView delay:delay];
             break;
         default:
@@ -164,16 +198,22 @@
     };
     
     void (^completion)(BOOL finish) = ^(BOOL finishi) {
-        [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            hudView.alpha = .0f;
-            hudView.transform = CGAffineTransformMakeScale(0.65, 0.65);
-        } completion:^(BOOL finished) {
-            [hudView removeFromSuperview];
-        }];
+        if (delay) {
+            [self dismissHUD:hudView delay:delay];
+        }
     };
     
     UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone;
     [UIView animateWithDuration:0.3 delay:0 options:options animations:animations completion:completion];
+}
+
+- (void)dismissHUD:(XHHUDView *)hudView delay:(NSTimeInterval)delay {
+    [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        hudView.alpha = .0f;
+        hudView.transform = CGAffineTransformMakeScale(0.65, 0.65);
+    } completion:^(BOOL finished) {
+        [hudView removeFromSuperview];
+    }];
 }
 
 @end

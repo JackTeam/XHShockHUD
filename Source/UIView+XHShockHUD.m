@@ -11,32 +11,45 @@
 @implementation UIView (XHShockHUD)
 
 - (void)showShockHUD:(UIView*)hudView
-              duration:(NSTimeInterval)duration
-            moveVector:(CGPoint)moveVector
+            duration:(NSTimeInterval)duration
+          moveVector:(CGPoint)moveVector
 {
     UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone;
     NSTimeInterval delay = 0.0;
     
     [self showShockHUD:hudView
-               duration:duration
-                  delay:delay
-                options:options
-             moveVector:moveVector];
+       backgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0    alpha:0.0]
+              duration:duration
+                 delay:delay
+               options:options
+            moveVector:moveVector];
 }
 
 - (void)showShockHUD:(UIView*)hudView
-              duration:(NSTimeInterval)duration
-                 delay:(NSTimeInterval)delay
-               options:(UIViewAnimationOptions)options
-            moveVector:(CGPoint)moveVector
+     backgroundColor:(UIColor *)backgroundColor
+            duration:(NSTimeInterval)duration
+          moveVector:(CGPoint)moveVector {
+    UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone;
+    NSTimeInterval delay = 0.0;
+    
+    [self showShockHUD:hudView backgroundColor:backgroundColor duration:duration delay:delay options:options moveVector:moveVector];
+}
+
+- (void)showShockHUD:(UIView*)hudView
+     backgroundColor:(UIColor *)backgroundColor
+            duration:(NSTimeInterval)duration
+               delay:(NSTimeInterval)delay
+             options:(UIViewAnimationOptions)options
+          moveVector:(CGPoint)moveVector
 {
     CGPoint endPoint = CGPointMake(hudView.center.x + moveVector.x, hudView.center.y + moveVector.y);
     
     [self showShockHUD:hudView
-               duration:duration
-                  delay:delay
-                options:options
-             animations:^{
+       backgroundColor:backgroundColor
+              duration:duration
+                 delay:delay
+               options:options
+            animations:^{
                  hudView.center = endPoint;
                  hudView.alpha = 0.0;
              }
@@ -44,13 +57,14 @@
 }
 
 - (void)showShockHUD:(UIView*)hudView
-              duration:(NSTimeInterval)duration
-                 delay:(NSTimeInterval)delay
-               options:(UIViewAnimationOptions)options
-            animations:(void (^)(void))animations
-            completion:(void (^)(BOOL))completion
+     backgroundColor:(UIColor *)backgroundColor
+            duration:(NSTimeInterval)duration
+               delay:(NSTimeInterval)delay
+             options:(UIViewAnimationOptions)options
+          animations:(void (^)(void))animations
+          completion:(void (^)(BOOL))completion
 {
-    hudView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0];
+    hudView.backgroundColor = backgroundColor;
     hudView.hidden = NO;
     
     [self addSubview:hudView];

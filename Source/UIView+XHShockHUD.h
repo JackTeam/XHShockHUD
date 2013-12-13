@@ -11,20 +11,27 @@
 @interface UIView (XHShockHUD)
 
 - (void)showShockHUD:(UIView*)hudView
-             duration:(NSTimeInterval)duration
-           moveVector:(CGPoint)moveVector;
+            duration:(NSTimeInterval)duration
+          moveVector:(CGPoint)moveVector;
 
 - (void)showShockHUD:(UIView*)hudView
-             duration:(NSTimeInterval)duration
-                delay:(NSTimeInterval)delay
-              options:(UIViewAnimationOptions)options
-           moveVector:(CGPoint)moveVector;
+     backgroundColor:(UIColor *)backgroundColor
+            duration:(NSTimeInterval)duration
+          moveVector:(CGPoint)moveVector;
 
 - (void)showShockHUD:(UIView*)hudView
-              duration:(NSTimeInterval)duration
-                 delay:(NSTimeInterval)delay
-               options:(UIViewAnimationOptions)options
-            animations:(void (^)(void))animations
-            completion:(void (^)(BOOL))completion;
+     backgroundColor:(UIColor *)backgroundColor
+            duration:(NSTimeInterval)duration
+               delay:(NSTimeInterval)delay
+             options:(UIViewAnimationOptions)options
+          moveVector:(CGPoint)moveVector;
+
+- (void)showShockHUD:(UIView*)hudView
+     backgroundColor:(UIColor *)backgroundColor
+            duration:(NSTimeInterval)duration
+               delay:(NSTimeInterval)delay
+             options:(UIViewAnimationOptions)options
+          animations:(void (^)(void))animations
+          completion:(void (^)(BOOL))completion;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MultiViewController.h
 //  XHShockHUD
 //
 //  Created by 曾 宪华 on 13-12-13.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface ViewController : BaseViewController
+@interface MultiViewController : BaseViewController
 
 @end
