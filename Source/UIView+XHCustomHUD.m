@@ -157,7 +157,7 @@ static char UIViewHUD;
 }
 
 - (void)showHUDWithText:(NSString *)text hudType:(XHHUDType)hudType animationType:(XHHUDAnimationType)animationType delay:(NSTimeInterval)delay {
-    [self showHUDWithText:text hudSize:CGSizeMake(150, 150) hudType:hudType animationType:animationType delay:delay];
+    [self showHUDWithText:text hudSize:CGSizeMake(100, 100) hudType:hudType animationType:animationType delay:delay];
 }
 
 - (void)showHUDWithText:(NSString *)text
