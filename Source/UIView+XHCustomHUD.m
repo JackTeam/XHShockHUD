@@ -165,7 +165,10 @@ static char UIViewHUD;
                 hudType:(XHHUDType)hudType
           animationType:(XHHUDAnimationType)animationType
                   delay:(NSTimeInterval)delay {
-    XHHUDView *hudView = [[XHHUDView alloc] initWithFrame:CGRectZero];
+    XHHUDView *hudView = self.hudView;
+    if (!hudView) {
+        hudView = [[XHHUDView alloc] initWithFrame:CGRectZero];
+    }
     
     CGRect hudViewFrame = hudView.frame;
     hudViewFrame.size = hudSize;
@@ -213,6 +216,7 @@ static char UIViewHUD;
         hudView.transform = CGAffineTransformMakeScale(0.65, 0.65);
     } completion:^(BOOL finished) {
         [hudView removeFromSuperview];
+        self.hudView = nil;
     }];
 }
 
