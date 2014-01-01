@@ -21,3 +21,11 @@ XHShockHUD
 ![image](https://github.com/JackTeam/XHShockHUD/raw/master/Screenshots/delayHUDLabel.png)
 
 ![image](https://github.com/JackTeam/XHShockHUD/raw/master/Screenshots/UIKitHUD.png)
+
+
+
+## License
+
+中文:      XHShockHUD 是在MIT协议下使用的，可以在LICENSE文件里面找到相关的使用协议信息.
+
+English:   XHShockHUD is acailable under the MIT license, see the LICENSE file for more information.
